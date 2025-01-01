@@ -1,0 +1,13 @@
+.card > .product {
+    width: 100px;
+    height: 100px;
+}
+
+.price {
+    text-align: center;
+}
+
+
+.count-btn > button  {
+    margin: 0px;
+}

@@ -1,0 +1,305 @@
+h1 {
+  display: flex; /* 컨테이너 활성화 */
+  align-items: center; /* 세로축 중앙 정렬 */
+  font-size: 50px;
+  margin: 0 auto;
+  justify-content: center;
+  color: rgba(233, 250, 1, 0.955); /* 텍스트 색상 */
+  z-index: 1; /* 배경 위에 표시되도록 설정 */
+  margin-bottom: 20px;
+  position: relative; /* 자식 요소와 배경을 분리하기 위해 position 설정 */
+}
+
+h1::before {
+  content: ''; /* 가상의 요소 추가 */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, blue, aqua, skyblue, white);
+  opacity: 0.4; /* 배경만 흐리게 */
+  z-index: -1; /* 배경이 콘텐츠 뒤로 가도록 설정 */
+}
+
+div {
+    /* margin-top: 20px; */
+    justify-content: center;
+    /* background-color: blanchedalmond; */
+    /* position: relative; */
+}
+
+.back {
+  background-image: url('/image/side/배경사진.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  filter: blur(2px); /* 흐림 효과 적용 */
+  z-index: -1; /* 콘텐츠보다 뒤에 위치하도록 설정 */
+  opacity: 0.5; /* 배경 흐림 효과 투명도 */
+}
+
+main {
+  margin: auto;
+  width: 70%;
+  /* background-color: rgb(186, 237, 254); */
+}
+
+main > div {
+  display: flex;
+  justify-content: center; 
+}
+
+.returnHome {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  top: 75px; 
+  left: 10px;
+}
+
+.returnHome:hover{
+  transform: scale(1.05); /* 확대 */
+}
+
+button {
+    background-color: rgb(186, 237, 254);
+    margin-bottom: 0;
+    border: 0;
+    width: 100px;
+    height: 25px;
+  }
+
+/* button:nth-child(1),
+button:nth-child(2),
+button:nth-child(3),
+button:nth-child(4) {
+  margin-right: 10px;
+} */
+
+button:hover {
+  background-color: rgba(93, 93, 254, 0.466); /* 마우스가 올라갔을 때 버튼 색 바뀜 */
+}
+
+button:hover,
+button:focus {
+  background-color: rgb(93, 93, 254); /* 버튼을 클릭했을 때 색 바뀜 */
+  transform: scale(1.05); /* 확대 */
+  font-size: 1em; /* 텍스트 크기 확대 */
+  color: yellow;
+  font-weight: bold;
+}
+
+.category {
+  width: 520px; /* 고정 가로 크기 */
+  min-height: 620px;
+  margin: 0 auto; /* 가운데 정렬 */
+  overflow: hidden; /* 넘치는 컨텐츠 숨김 */
+}
+
+#menu {
+  /* background-color: #d32f2f; */
+  margin: 0;
+}
+
+
+.menu-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-item {
+  display: block;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.menu-item img {
+  width: 100px;
+  height: 80px;
+  margin-bottom: 10px; /* 이미지와 텍스트 사이에 간격 */
+  margin-left: auto; /* 좌우 여백 자동 설정 */
+  margin-right: auto; /* 좌우 여백 자동 설정 */
+}
+
+.menu-item:hover {
+  transform: scale(1.05); /* 아이템 확대 */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 추가 */
+  background-color: rgba(93, 93, 254, 0.1); /* 배경 색상 변경 */
+}
+
+/* 각 아이템에 대한 세부 스타일 */
+.menu-item p {
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.slick-slider {
+  height: 450px;
+}
+
+.slick-slide {
+  width: 100px; /* 슬라이드 아이템 너비 설정 */
+  height: 100px;
+  gap: 10px;
+}
+
+.slick-slide .impotmation{
+  flex-direction: column;
+
+}
+
+.slick-slide .impotmation:hover{  transform: scale(1.05); /* 확대 */
+  font-size: 2em; /* 텍스트 크기 확대 */}
+
+.menu-display {
+  overflow: hidden; /* 필수 */
+  width: 100%;
+}
+
+.placeholder{
+  height: 120px;
+  background-color: #f0f0f0;
+  border: 1px dashed #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*--------장바구니 css */
+
+.cart-summary {
+  margin: 20px 0;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+}
+.cart-summary div {
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+/* 장바구니 고정 */
+.cart-container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+  height: 50vh; /* 장바구니 높이 설정 */
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+  transform: translateY(100%); /* 기본 상태는 화면 아래에 숨겨짐 */
+  overflow-y: auto; /* 스크롤 가능 */
+}
+
+/* 카테고리별 합산 금액 스타일 */
+#cart h3 {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+/* 장바구니 항목들을 가로로 나열 */
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* 장바구니 항목 스타일 */
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* 고정된 장바구니 컨테이너 */
+.cart-container {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 300px;
+  height: 50vh; /* 높이를 절반으로 설정 */
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s ease;
+  transform: translateY(100%); /* 기본 상태는 아래로 내려가 있음 */
+  overflow-y: auto; /* 내용이 넘칠 경우 스크롤 가능하게 설정 */
+}
+
+.cart-container.open {
+  transform: translateY(0); /* 열리면 위로 올라옴 */
+}
+
+.item-details {
+  flex-grow: 1;
+}
+
+/* 수량 버튼 및 입력창 스타일 */
+.quantity-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.quantity-btn {
+  background-color: #4CAF50;
+  width: 2em;
+  color: white;
+  font-size: 18px;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.quantity-btn:hover {
+  background-color: #45a049;
+}
+
+.quantity-input {
+  width: 50px;
+  padding: 5px;
+  font-size: 18px;
+  text-align: center;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+/* 합계 금액 오른쪽에 표시 */
+.item-total {
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 20px;
+}
+
+/* 삭제 버튼 스타일 */
+.remove-btn {
+  width: 5em;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.remove-btn:hover {
+  background-color: #e53935;
+}
+
+/* 총액 표시 */
+.total {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 22px;
+  font-weight: bold;
+} 
