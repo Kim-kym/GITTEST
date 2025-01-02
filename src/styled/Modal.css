@@ -1,402 +1,451 @@
 * {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 
 }
 
 body {
-  font-family: "Arial", sans-serif;
+font-family: "Arial", sans-serif;
 }
 
 .modal-overlay {
-    position: fixed; /* 화면 전체를 덮음 */
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* 반투명 검은색 배경 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999; /* 항상 최상위에 표시 */
+  position: fixed; /* 화면 전체를 덮음 */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명 검은색 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999; /* 항상 최상위에 표시 */
+}
+
+.modal {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  width: 70%; /* 화면 너비의 80% */
+  height: 80%;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* 그림자 효과 */
+  z-index: 10000;
+  overflow: hidden; /* 내용이 넘치지 않도록 설정 */
+  overflow-y: auto; /* 세로 스크롤 활성화 */
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
   }
-  
-  .modal {
-    position: relative;
-    background: #fff;
-    border-radius: 12px;
-    padding: 20px;
-    width: 80%; /* 화면 너비의 80% */
-    height: 80%;
-    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* 그림자 효과 */
-    z-index: 10000;
-    overflow: hidden; /* 내용이 넘치지 않도록 설정 */
-    overflow-y: auto; /* 세로 스크롤 활성화 */
-    animation: fadeIn 0.5s ease-in-out;
+  to {
+    opacity: 1;
+    transform: scale(1);
   }
-  
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: scale(0.95);
-    }
-    to {
-      opacity: 1;
-      transform: scale(1);
-    }
-  }
-  
+}
+
 /* 선택한 메뉴 정보 */
 .selected-menu {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  margin-bottom: 20px;
+display: flex;
+gap: 20px;
+align-items: center;
+margin-bottom: 20px;
 }
 
 .selected-menu img {
-  width: 120px;
-  height: 120px;
-  border-radius: 8px;
+width: 120px;
+height: 120px;
+border-radius: 8px;
+object-fit: cover;
+box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.selected-menu div {
+flex-grow: 1;
+}
+
+.selected-menu h3 {
+font-size: 1.2rem;
+color: #333;
+margin-bottom: 10px;
+}
+
+.selected-menu p {
+font-size: 0.9rem;
+color: #666;
+margin-bottom: 5px;
+}
+
+.image-checkbox-container {
+display: flex;
+align-items: center;
+margin-top: 10px;
+}
+
+.image-checkbox {
+margin-right: 10px;
+}
+
+.image-checkbox:checked + span {
+color: #007bff;
+font-weight: bold;
+}
+
+/* 토핑 리스트 */
+.carousel-container {
+margin: 20px 0;
+}
+
+.carousel-item {
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+border: 1px solid #ddd;
+border-radius: 8px;
+min-width: 200px;
+padding: 10px;
+background-color: #fff;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.carousel-item img {
+width: 80px;
+height: 80px;
+border-radius: 50%;
+margin-bottom: 10px;
+margin: 0 auto;
+}
+
+.carousel-item h2 {
+font-size: 1rem;
+color: #333;
+margin-bottom: 10px;
+}
+
+.carousel-item .price {
+font-size: 0.9rem;
+color: #666;
+}
+
+.count-btn {
+display: flex;
+align-items: center;
+justify-content: center;
+gap: 10px;
+margin-top: 10px;
+}
+
+.count-btn button {
+background-color: #ffcc00;
+border: none;
+border-radius: 8px;
+padding: 5px 10px;
+font-size: 1rem;
+cursor: pointer;
+transition: background-color 0.3s ease;
+}
+
+.count-btn button:hover {
+background-color: #ffb800;
+}
+
+.count-btn span {
+font-size: 1rem;
+font-weight: bold;
+}
+
+
+.carousel-container {
+  overflow: hidden; /* 슬라이더 이미지가 잘리지 않도록 설정 */
+  padding: 0 20px;
+
+}
+
+.carousel-item {    
+  max-width: 200px; 
+}
+
+h2 {
+  text-align: center;
+}
+
+.check-btn {
+  background: gray;
+  height: 100px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+
+}
+.check-btn .btn-yes {
+  width: 50%;
+  height: 50%;
+  margin: 50px;
+}
+
+.check-btn .btn-no {
+  display: inline-block;
+  background: rgb(221, 162, 162);
+  width: 50%;
+  height: 50%;
+  margin: 50px;
+}
+
+.slide {
+  text-align: center;
+}
+
+.modal-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.modal-content img {
+  flex-shrink: 0;
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
   object-fit: cover;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.modal-content div {
+  flex-grow: 1;
+}
+
+.set-menu-content {
+  display: flex; 
+  align-items: center; 
+  gap: 20px; 
+  margin-bottom: 20px;
+}
+
+.set-menu-content img {
+  flex-shrink: 0;
+  width: 200px;
+  height: 200px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.set-menu-content div {
+  flex-grow: 1;
+}
+
+.set-menu-content p {
+  margin-bottom: 10px;
+} 
+.selected-menu {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.selected-menu img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
 }
 
 .selected-menu div {
   flex-grow: 1;
 }
 
-.selected-menu h3 {
-  font-size: 1.2rem;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.selected-menu p {
-  font-size: 0.9rem;
-  color: #666;
-  margin-bottom: 5px;
-}
-
-.image-checkbox-container {
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
-}
-
-.image-checkbox {
-  margin-right: 10px;
+.actions button {
+  padding: 10px 20px;
+  margin: 5px;
 }
 
 .image-checkbox:checked + span {
-  color: #007bff;
+  color: green; /* 체크된 상태일 때 텍스트 색상 변경 */
   font-weight: bold;
-}
-
-/* 토핑 리스트 */
-.carousel-container {
-  margin: 20px 0;
-}
-
-.carousel-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  min-width: 200px;
-  padding: 10px;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.carousel-item img {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  margin-bottom: 10px;
-  margin: 0 auto;
-}
-
-.carousel-item h2 {
-  font-size: 1rem;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.carousel-item .price {
-  font-size: 0.9rem;
-  color: #666;
-}
-
-.count-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.count-btn button {
-  background-color: #ffcc00;
-  border: none;
-  border-radius: 8px;
-  padding: 5px 10px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.count-btn button:hover {
-  background-color: #ffb800;
-}
-
-.count-btn span {
-  font-size: 1rem;
-  font-weight: bold;
-}
-
-
-.carousel-container {
-    overflow: hidden; /* 슬라이더 이미지가 잘리지 않도록 설정 */
-    padding: 0 20px;
-
-  }
-
-  .carousel-item {    
-    max-width: 200px; 
-  }
-
-h2 {
-    text-align: center;
-}
-
-.check-btn {
-    background: gray;
-    height: 100px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-
-}
-.check-btn .btn-yes {
-    width: 50%;
-    height: 50%;
-    margin: 50px;
-}
-
-.check-btn .btn-no {
-    display: inline-block;
-    background: rgb(221, 162, 162);
-    width: 50%;
-    height: 50%;
-    margin: 50px;
-}
-
-.slide {
-    text-align: center;
-}
-
- .modal-content {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 20px;
-  }
-  
-  .modal-content img {
-    flex-shrink: 0;
-    width: 200px;
-    height: 200px;
-    border-radius: 10px;
-    object-fit: cover;
-  }
-  
-  .modal-content div {
-    flex-grow: 1;
-  }
-  
-  .set-menu-content {
-    display: flex; 
-    align-items: center; 
-    gap: 20px; 
-    margin-bottom: 20px;
-  }
-  
-  .set-menu-content img {
-    flex-shrink: 0;
-    width: 200px;
-    height: 200px;
-    border-radius: 10px;
-    object-fit: cover;
-  }
-  
-  .set-menu-content div {
-    flex-grow: 1;
-  }
-  
-  .set-menu-content p {
-    margin-bottom: 10px;
-  } 
-  .selected-menu {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-  }
-
-  .selected-menu img {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-  }
-  
-  .selected-menu div {
-    flex-grow: 1;
-  }
-  
-  .actions button {
-    padding: 10px 20px;
-    margin: 5px;
-  }
-
-  .image-checkbox:checked + span {
-    color: green; /* 체크된 상태일 때 텍스트 색상 변경 */
-    font-weight: bold;
 }
 
 .modal .menu-image {
-    border: 3px solid transparent;
-    border-radius: 8px;
-    transition: border 0.3s ease;
-    object-fit: cover;
-  }
-  
-  .modal .menu-image.set-menu {
-    border-color: green;
-  }
+  border: 3px solid transparent;
+  border-radius: 8px;
+  transition: border 0.3s ease;
+  object-fit: cover;
+}
+
+.modal .menu-image.set-menu {
+  border-color: green;
+}
 
 .react-multi-carousel-list {
-    max-width: 100%;
-    margin: auto;
-    justify-content: space-around;
+  max-width: 100%;
+  margin: auto;
+  justify-content: space-around;
 }
 
 /* .react-multi-carousel-list {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 100%;
-  margin: auto;
-  overflow: hidden;
+display: flex;
+justify-content: space-between;
+align-items: center;
+max-width: 100%;
+margin: auto;
+overflow: hidden;
 } */
 
 /* .carousel-item {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  max-width: 180px;
-  margin: 0 10px;
-  padding: 10px;
-  background-color: #f9f9f9;
-  border-radius: 10px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+max-width: 180px;
+margin: 0 10px;
+padding: 10px;
+background-color: #f9f9f9;
+border-radius: 10px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 } */
 
 /* .react-multi-carousel-item--active {
-  transform: scale(1.05);
-  transition: transform 0.3s ease-in-out;
-  border: 2px solid #007bff;
+transform: scale(1.05);
+transition: transform 0.3s ease-in-out;
+border: 2px solid #007bff;
 } */
 
 /* .modal {
-  position: relative;
-  max-width: 90%;
-  max-height: 90%;
-  overflow-y: auto;
-  background: white;
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4);
-  animation: fadeIn 0.3s ease-in-out;
+position: relative;
+max-width: 90%;
+max-height: 90%;
+overflow-y: auto;
+background: white;
+border-radius: 12px;
+padding: 20px;
+box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.4);
+animation: fadeIn 0.3s ease-in-out;
 } */
 
 .count-btn button {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: #007bff;
-  color: white;
-  font-size: 1rem;
-  font-weight: bold;
-  border: none;
-  transition: background-color 0.3s ease;
+width: 30px;
+height: 30px;
+border-radius: 50%;
+background-color: #007bff;
+color: white;
+font-size: 1rem;
+font-weight: bold;
+border: none;
+transition: background-color 0.3s ease;
 }
 
 .count-btn button:hover {
-  background-color: #0056b3;
+background-color: #0056b3;
 }
 
 .carousel-item {
-  display: flex;
-  flex-direction: column; /* 이미지와 버튼을 위아래로 배치 */
-  align-items: center;
-  justify-content: space-between; /* 간격 유지 */
-  padding: 10px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+display: flex;
+flex-direction: column; /* 이미지와 버튼을 위아래로 배치 */
+align-items: center;
+justify-content: space-between; /* 간격 유지 */
+padding: 10px;
+background-color: #fff;
+border-radius: 8px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .carousel-item .price.hidden {
-  visibility: hidden; /* 텍스트를 숨기되 공간 유지 */
-  margin-bottom: 5px; /* 다른 항목과 동일한 여백 */
+visibility: hidden; /* 텍스트를 숨기되 공간 유지 */
+margin-bottom: 5px; /* 다른 항목과 동일한 여백 */
 }
 
 .actions {
-  position: absolute; /* 모달 내부에서 위치 고정 */
-  bottom: 20px; /* 모달 하단에서 20px 위로 */
-  left: 20px; /* 모달 좌측 여백 */
-  right: 20px; /* 모달 우측 여백 */
-  display: flex; /* 버튼 가로 배치 */
-  justify-content: space-between; /* 양쪽 끝에 버튼 배치 */
-  gap: 10px; /* 버튼 간격 */
+position: absolute; /* 모달 내부에서 위치 고정 */
+bottom: 20px; /* 모달 하단에서 20px 위로 */
+left: 20px; /* 모달 좌측 여백 */
+right: 20px; /* 모달 우측 여백 */
+display: flex; /* 버튼 가로 배치 */
+justify-content: space-between; /* 양쪽 끝에 버튼 배치 */
+gap: 10px; /* 버튼 간격 */
 }
 
 .actions button {
-  flex: 1; /* 버튼이 동일한 너비를 가지도록 설정 */
-  display: flex; /* 버튼 내부에서 플렉스 사용 */
-  align-items: center; /* 수직 중앙 정렬 */
-  justify-content: center; /* 수평 중앙 정렬 */
-  padding: 15px 0; /* 버튼 높이 */
-  font-size: 1rem; /* 텍스트 크기 */
-  font-weight: bold; /* 텍스트 가중치 */
-  border: none; /* 기본 테두리 제거 */
-  border-radius: 8px; /* 둥근 모서리 */
-  cursor: pointer; /* 포인터 모양으로 변경 */
-  transition: all 0.3s ease; /* 부드러운 전환 효과 */
-  text-align: center; /* 텍스트 중앙 정렬 */
-  background-color: #ddd; /* 버튼 배경색 */
-  color: #333; /* 버튼 텍스트 색상 */
+flex: 1; /* 버튼이 동일한 너비를 가지도록 설정 */
+display: flex; /* 버튼 내부에서 플렉스 사용 */
+align-items: center; /* 수직 중앙 정렬 */
+justify-content: center; /* 수평 중앙 정렬 */
+padding: 15px 0; /* 버튼 높이 */
+font-size: 1rem; /* 텍스트 크기 */
+font-weight: bold; /* 텍스트 가중치 */
+border: none; /* 기본 테두리 제거 */
+border-radius: 8px; /* 둥근 모서리 */
+cursor: pointer; /* 포인터 모양으로 변경 */
+transition: all 0.3s ease; /* 부드러운 전환 효과 */
+text-align: center; /* 텍스트 중앙 정렬 */
+background-color: #ddd; /* 버튼 배경색 */
+height: 60px;
+color: #333; /* 버튼 텍스트 색상 */
 }
 
 .actions button:first-child {
+background-color: #007bff;
+color: #fff;
+}
+
+.actions button:first-child:hover {
+background-color: #0056b3;
+}
+
+.actions button:last-child:hover {
+background-color: #bbb;
+}
+
+.set-menu-modal {
+  position: relative;
+  padding-bottom: 0; /* 버튼 높이만큼 여유 공간 추가 */
+}
+
+.set-menu-modal .actions {
+  position: sticky; /* 버튼이 스크롤될 때 모달 하단에 고정 */
+  bottom: 0;
+  /* background-color: #fff;  */
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between; /* 양쪽 끝으로 버튼 배치 */
+  gap: 10px; /* 버튼 간 간격 */
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.01); 
+}
+
+.set-menu-modal .actions button {
+  flex: 1; /* 버튼 너비를 균등하게 */
+  padding: 15px 0;
+  height: 60px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 50px;
+}
+
+.set-menu-modal .actions button:first-child {
   background-color: #007bff;
   color: #fff;
 }
 
-.actions button:first-child:hover {
+.set-menu-modal .actions button:first-child:hover {
   background-color: #0056b3;
 }
 
-.actions button:last-child:hover {
+.set-menu-modal .actions button:last-child {
+  background-color: #ddd;
+  color: #333;
+}
+
+.set-menu-modal .actions button:last-child:hover {
   background-color: #bbb;
 }
 
+
 .Total-Price {
-  margin-bottom: 20px;
+margin-bottom: 20px;
 }
 
 /* .Topping-Plus {

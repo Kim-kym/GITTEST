@@ -133,38 +133,6 @@ const SideList = [
     imgurl: "/image/side/sweet-chili-sauce.jpg",
     category: "side",
   },
-
-  // {
-  //   id: 318,
-  //   name: "어니언",
-  //   price: 600,
-  //   imgurl: "",
-  //   category: "side",
-  // },
-
-  // {
-  //   id: 319,
-  //   name: "칠리",
-  //   price: 600,
-  //   imgurl: "",
-  //   category: "side",
-  // },
-
-  // {
-  //   id: 320,
-  //   name: "갈릭",
-  //   price: 600,
-  //   imgurl: "",
-  //   category: "side",
-  // },
-
-  // {
-  //   id: 321,
-  //   name: "치즈",
-  //   price: 600,
-  //   imgurl: "",
-  //   category: "side",
-  // },
 ];
 
 export default SideList;

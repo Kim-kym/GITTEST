@@ -4,14 +4,14 @@ import { useState, useEffect, useRef } from "react";
 import BurgerSetMenuData from "../menu/BurgerSetMenuData";
 import productMenuData from "../menu/ProductMenuData";
 
-function CustomModal({ 
-  formatPrice, 
-  open, 
-  setOpen, 
-  selectedItem, 
+function CustomModal({
+  formatPrice,
+  open,
+  setOpen,
+  selectedItem,
   addToCart,
   onModalTypeChange,
-  }) {
+}) {
   const [selectedMenu, setSelectedMenu] = useState(selectedItem || {});
   const [quantityMap, setQuantityMap] = useState({});
   const [isSetMenuSelected, setIsSetMenuSelected] = useState(false);
@@ -27,7 +27,7 @@ function CustomModal({
   const handleCheckboxChange = (e) => {
     const isChecked = e.target.checked;
     setIsSetMenuSelected(isChecked);
-  
+
     if (isChecked && setMenu) {
       // 세트 메뉴로 전환 시 상위 컴포넌트에 세트 메뉴 정보 전달
       onModalTypeChange("setMenu");
@@ -37,7 +37,7 @@ function CustomModal({
   const setMenu = selectedItem?.setMenuId
     ? BurgerSetMenuData.find((set) => set.id === selectedItem.setMenuId)
     : null;
-  
+
   useEffect(() => {
     if (selectedItem) {
       setSelectedMenu(selectedItem);
@@ -95,18 +95,35 @@ function CustomModal({
   };
 
   const handleAddToCart = () => {
+    const toppings = Object.entries(quantityMap)
+      .filter(([_, quantity]) => quantity > 0)
+      .map(([id, quantity]) => {
+        const toppingData = productMenuData.find(
+          (item) => item.id === parseInt(id)
+        );
+        if (toppingData) {
+          return {
+            ...toppingData,
+            quantity, // 수량 포함
+          };
+        }
+        return null; // 잘못된 데이터 방지
+      })
+      .filter((topping) => topping !== null); // 유효한 토핑만 포함
+  
     const cartItem = {
       ...selectedMenu,
-      toppings: Object.entries(quantityMap)
-        .filter(([_, quantity]) => quantity > 0)
-        .map(([id, quantity]) => ({
-          ...productMenuData.find((item) => item.id === parseInt(id)),
-          quantity,
-        })),
+      toppings, // 선택된 토핑 추가
+      quantity: 1, // 기본 수량
     };
+  
+    // 장바구니에 추가
     addToCart(cartItem);
+  
+    // 모달 닫기
     setOpen(false);
   };
+  
 
   return (
     <Modal
@@ -140,7 +157,9 @@ function CustomModal({
             </div>
           </div>
         )}
-        <h3 className="Total-Price">Total Price: {formatPrice(calculateTotalPrice())}원</h3>
+        <h3 className="Total-Price">
+          Total Price: {formatPrice(calculateTotalPrice())}원
+        </h3>
         <h4 className="Topping-Plus">토핑 추가</h4>
         <ToppingList
           productData={productMenuData}

@@ -22,6 +22,22 @@ const CoffeeList = [
     imgurl: "/image/coffee/vanilla-latte.jpg",
     category: "coffee",
   },
+
+  {
+    id: 204,
+    name: "아포가토",
+    price: 4500,
+    imgurl: "/image/coffee/affogato.jpg",
+    category: "coffee",
+  },
+
+  {
+    id: 205,
+    name: "카푸치노",
+    price: 4000,
+    imgurl: "/image/coffee/cappuccino.jpg",
+    category: "coffee",
+  },
 ];
 
 export default CoffeeList;

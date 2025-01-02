@@ -13,7 +13,7 @@ function SetMenuModal({
   productMenuData,
   formatPrice,
   handleOptionModalOpen,
-  onModalTypeChange, 
+  onModalTypeChange,
 }) {
   const defaultSide = sideMenuData.find((item) => item.name === "감자튀김");
   const defaultDrink = drinkMenuData.find((item) => item.name === "콜라");
@@ -25,6 +25,25 @@ function SetMenuModal({
   const [drinkQuantity, setDrinkQuantity] = useState(() =>
     defaultDrink ? { [defaultDrink.id]: 1 } : {}
   );
+
+  const [selectedSide, setSelectedSide] = useState(null); // 선택된 사이드 메뉴 상태
+
+  const handleSideSelect = (side) => {
+    setSelectedSide(side); // 사이드 메뉴 선택 처리
+  };
+
+  const handleAddSideToCart = () => {
+    if (selectedSide) {
+      addToCart({
+        id: selectedSide.id,
+        name: selectedSide.name,
+        quantity: 1,
+        price: selectedSide.price,
+        category: "side", // 사이드 메뉴로 구분
+      });
+      setOpen(false); // 모달 닫기
+    }
+  };
 
   const hasDefaultSideChanged = useRef(false);
   const hasDefaultDrinkChanged = useRef(false);
@@ -202,8 +221,27 @@ function SetMenuModal({
     return (selectedItem?.price || 0) + productPrice + sidePrice + drinkPrice;
   };
 
+  // const handleAddToCart = () => {
+  //   addToCart({
+  //     ...selectedItem,
+  //     product: Object.entries(productQuantity).map(([id, qty]) => ({
+  //       ...productMenuData.find((item) => item.id === parseInt(id)),
+  //       quantity: qty,
+  //     })),
+  //     sides: Object.entries(sideQuantity).map(([id, qty]) => ({
+  //       ...sideMenuData.find((item) => item.id === parseInt(id)),
+  //       quantity: qty,
+  //     })),
+  //     drinks: Object.entries(drinkQuantity).map(([id, qty]) => ({
+  //       ...drinkMenuData.find((item) => item.id === parseInt(id)),
+  //       quantity: qty,
+  //     })),
+  //   });
+  //   setOpen(false);
+  // };
   const handleAddToCart = () => {
-    addToCart({
+    // 장바구니에 추가할 데이터 생성
+    const cartItem = {
       ...selectedItem,
       product: Object.entries(productQuantity).map(([id, qty]) => ({
         ...productMenuData.find((item) => item.id === parseInt(id)),
@@ -217,14 +255,17 @@ function SetMenuModal({
         ...drinkMenuData.find((item) => item.id === parseInt(id)),
         quantity: qty,
       })),
-    });
-    setOpen(false);
+    };
+
+    // 장바구니에 아이템 추가
+    addToCart(cartItem); // 부모 컴포넌트에서 전달된 addToCart 함수 호출
+    setOpen(false); // 모달을 닫기
   };
 
   const handleCheckboxChange = (e) => {
     if (typeof onModalTypeChange === "function") {
       const isChecked = !e.target.checked; // 체크 해제 시 단품 메뉴로 전환
-  
+
       if (!isChecked && selectedItem?.id) {
         onModalTypeChange("custom");
       }
@@ -236,28 +277,27 @@ function SetMenuModal({
   return (
     <Modal isOpen={open} onClose={() => setOpen(false)}>
       <div className="set-menu-modal">
-      <div className="selected-menu">
-        <img
-          src={selectedItem.imgurl}
-          alt={selectedItem.name}
-        />
-        <div>
-        <h3>{selectedItem?.name}</h3>
-        <p>알레르기: {selectedItem.allergy || "없음"}</p>
-        <p>가격: {formatPrice(selectedItem.price)}원</p>
-        <p>{selectedItem ? "현재: 세트 메뉴" : "현재: 단품 메뉴"}</p>
-        <label className="image-checkbox-container">
-                <input
-                  type="checkbox"
-                  className="image-checkbox"
-                  // checked={isSetMenuSelected}
-                  onChange={handleCheckboxChange}
-                />
-                <span>단품 메뉴로 변경</span> {/* 체크박스 옆에 표시될 텍스트 */}
-              </label>
-              </div>
-              </div>
-        <h3 className="Total-Price">Total Price: {formatPrice(calculateTotalPrice())}</h3>
+        <div className="selected-menu">
+          <img src={selectedItem.imgurl} alt={selectedItem.name} />
+          <div>
+            <h3>{selectedItem?.name}</h3>
+            <p>알레르기: {selectedItem.allergy || "없음"}</p>
+            <p>가격: {formatPrice(selectedItem.price)}원</p>
+            <p>{selectedItem ? "현재: 세트 메뉴" : "현재: 단품 메뉴"}</p>
+            <label className="image-checkbox-container">
+              <input
+                type="checkbox"
+                className="image-checkbox"
+                // checked={isSetMenuSelected}
+                onChange={handleCheckboxChange}
+              />
+              <span>단품 메뉴로 변경</span> {/* 체크박스 옆에 표시될 텍스트 */}
+            </label>
+          </div>
+        </div>
+        <h3 className="Total-Price">
+          Total Price: {formatPrice(calculateTotalPrice())}
+        </h3>
 
         <h4>토핑 추가</h4>
         <ToppingList
@@ -298,8 +338,8 @@ function SetMenuModal({
           )} // 음료 메뉴
         />
         <div className="actions">
-        <button onClick={handleAddToCart}>추가</button>
-        <button onClick={() => setOpen(false)}>취소</button>
+          <button onClick={handleAddToCart}>추가</button>
+          <button onClick={() => setOpen(false)}>취소</button>
         </div>
       </div>
 
